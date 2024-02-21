@@ -1,0 +1,7 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  Include:
+    - 'src/**/*.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
