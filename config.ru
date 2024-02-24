@@ -2,5 +2,5 @@
 
 # \ -p 3333 -o 0
 
-require_relative 'src/main/server'
+require_relative 'src/root/server'
 run Server
