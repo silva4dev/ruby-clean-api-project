@@ -3,8 +3,17 @@
 require 'securerandom'
 
 class Task
-  attr_reader :id, :title, :description, :completed
+  # @return [String]
+  attr_reader :id
+  # @return [String]
+  attr_reader :title
+  # @return [String]
+  attr_reader :description
+  # @return [Boolean]
+  attr_reader :completed
 
+  # @param {String} title
+  # @param {String} description
   def initialize(title, description)
     @id = SecureRandom.uuid
     @title = title
@@ -12,6 +21,7 @@ class Task
     @completed = false
   end
 
+  # @return [void]
   def mark_as_completed
     @completed = true
   end

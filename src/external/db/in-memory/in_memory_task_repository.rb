@@ -35,12 +35,11 @@ class InMemoryTaskRepository
     return nil unless index
 
     @tasks[index] = {
-      id: id,
+      id:,
       title: updated_task.title,
       description: updated_task.description,
       completed: updated_task.completed
     }
-
     @tasks[index]
   end
 
