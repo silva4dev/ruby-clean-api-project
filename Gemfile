@@ -9,6 +9,6 @@ gem 'puma'
 gem 'rack', '~> 2.2'
 
 group :development do
-  gem 'rubocop'
   gem 'rerun'
+  gem 'rubocop'
 end
