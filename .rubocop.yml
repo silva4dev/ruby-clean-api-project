@@ -20,16 +20,6 @@ Metrics/AbcSize:
   Enabled: false
 Naming/PredicateName:
   Enabled: false
-RSpec/ExampleLength:
-  Enabled: false
-RSpec/ExampleWording:
-  Enabled: false
-RSpec/MultipleExpectations:
-  Enabled: false
-RSpec/FilePath:
-  Enabled: false
-RSpec/SpecFilePathFormat:
-  Enabled: false
 Naming/FileName:
   Enabled: false
 Style/MixinGrouping:
