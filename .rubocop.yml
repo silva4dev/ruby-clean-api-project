@@ -1,7 +1,36 @@
 AllCops:
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.3.0
+  NewCops: enable
   Include:
     - 'src/**/*.rb'
 
 Style/FrozenStringLiteralComment:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Naming/PredicateName:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/ExampleWording:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/FilePath:
+  Enabled: false
+RSpec/SpecFilePathFormat:
+  Enabled: false
+Naming/FileName:
+  Enabled: false
+Style/MixinGrouping:
   Enabled: false
