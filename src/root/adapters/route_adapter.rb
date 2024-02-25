@@ -3,7 +3,7 @@
 require 'json'
 
 class RouteAdapter
-  def self.adapt(controller, method_name)
+  def self.adapt(controller)
     lambda do |request|
       http_request = {
         body: (body = request.body.read
@@ -12,7 +12,7 @@ class RouteAdapter
         query: request.params,
         headers: request.env
       }
-      controller.send(method_name.to_sym, http_request)
+      controller.handle(http_request)
     end
   end
 end
