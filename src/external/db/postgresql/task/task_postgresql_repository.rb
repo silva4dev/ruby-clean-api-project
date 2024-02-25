@@ -4,7 +4,7 @@ require 'json'
 require_relative '../../../../data/contracts/db/task_repository'
 require_relative '../helpers/postgresql_helper'
 
-class TasksPostgreSQLRepository
+class TaskPostgreSQLRepository
   include TaskRepository
 
   def find
