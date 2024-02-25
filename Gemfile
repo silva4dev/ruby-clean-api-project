@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 ruby '3.3.0'
 
 gem 'grape'
+gem 'pg'
 gem 'puma'
 gem 'rack', '~> 2.2'
 
