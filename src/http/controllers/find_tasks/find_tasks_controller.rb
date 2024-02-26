@@ -13,6 +13,6 @@ class FindTasksController
 
   def handle(http_request)
     tasks = @find_tasks_usecase.execute
-    HttpHelper.ok({ tasks: })
+    HttpHelper.ok({ data: tasks })
   end
 end
