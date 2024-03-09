@@ -14,5 +14,7 @@ class FindTasksController
   def handle(http_request)
     tasks = @find_tasks_usecase.execute
     HttpHelper.ok({ data: tasks })
+  rescue StandardError
+    HttpHelper.server_error
   end
 end
