@@ -11,6 +11,13 @@ class DbFindTasks
   end
 
   def execute
-    @task_repository.find
+    @task_repository.find.map do |task|
+      {
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        completed: task.completed
+      }
+    end
   end
 end
