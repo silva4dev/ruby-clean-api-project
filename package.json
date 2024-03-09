@@ -7,9 +7,14 @@
   "license": "ISC",
   "scripts": {
     "start": "bundle exec ruby ./src/root/server.rb",
-    "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 3333 -r ./src/root/server.rb -s puma'"
+    "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 3333 -r ./src/root/server.rb -s puma'",
+    "ruby:fix": "bundle exec rubocop -a",
+    "ruby:lint": "bundle exec rubocop",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "git-commit-msg-linter": "^2.3.11"
+    "git-commit-msg-linter": "^2.3.11",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
   }
 }
