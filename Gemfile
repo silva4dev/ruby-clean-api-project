@@ -14,3 +14,8 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-performance'
 end
+
+group :test do
+  gem 'rack-test'
+  gem 'rspec'
+end
