@@ -5,6 +5,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "21.x"
+  },
   "scripts": {
     "start": "bundle exec ruby ./src/root/server.rb",
     "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 3333 -r ./src/root/server.rb -s puma'",
