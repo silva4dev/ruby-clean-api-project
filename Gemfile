@@ -13,6 +13,7 @@ group :development do
   gem 'rerun'
   gem 'rubocop'
   gem 'rubocop-performance'
+  gem 'rubocop-rspec'
 end
 
 group :test do
