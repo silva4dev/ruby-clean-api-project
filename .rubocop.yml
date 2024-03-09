@@ -1,4 +1,7 @@
 AllCops:
+  require:
+    - rubocop-performance
+
   TargetRubyVersion: 3.3.0
   NewCops: enable
   Include:

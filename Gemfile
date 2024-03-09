@@ -12,4 +12,5 @@ gem 'rack', '~> 2.2'
 group :development do
   gem 'rerun'
   gem 'rubocop'
+  gem 'rubocop-performance'
 end
