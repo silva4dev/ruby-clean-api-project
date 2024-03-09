@@ -1,5 +1,5 @@
 {
-  "**/**/*.rb": [
+  "src/**/*.rb": [
     "npm run ruby:fix"
   ]
 }
