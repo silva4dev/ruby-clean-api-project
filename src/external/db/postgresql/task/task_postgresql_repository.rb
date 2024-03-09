@@ -3,6 +3,7 @@
 require 'json'
 require_relative '../../../../data/contracts/db/task_repository'
 require_relative '../helpers/postgresql_helper'
+require_relative '../../../../core/models/task'
 
 class TaskPostgreSQLRepository
   include TaskRepository
@@ -10,33 +11,48 @@ class TaskPostgreSQLRepository
   def find
     query = 'SELECT * FROM tasks'
     data = PostgreSQLHelper.instance.execute(query)
-    data.map { |row| row.transform_keys(&:to_sym) }
+    data.map do |row|
+      Task.new(row['title'], row['description']).tap do |t|
+        t.instance_variable_set(:@id, row['id'])
+        t.instance_variable_set(:@completed, row['completed'])
+      end
+    end
   end
 
   def add(task)
-    query = 'INSERT INTO tasks (title, description, completed) VALUES ($1, $2, $3)
-             RETURNING id, title, description, completed'
+    query = 'INSERT INTO tasks (title, description, completed) VALUES ($1, $2, $3) RETURNING *'
     data = PostgreSQLHelper.instance.execute(query, [task.title, task.description, task.completed])
-    JSON.parse(data.first.to_json, symbolize_names: true)
+    Task.new(data.first['title'], data.first['description']).tap do |t|
+      t.instance_variable_set(:@id, data.first['id'])
+      t.instance_variable_set(:@completed, data.first['completed'])
+    end
   end
 
   def find_by_id(id)
     query = 'SELECT * FROM tasks WHERE id = $1'
     data = PostgreSQLHelper.instance.execute(query, [id])
-    JSON.parse(data.first.to_json, symbolize_names: true)
+    Task.new(data.first['title'], data.first['description']).tap do |t|
+      t.instance_variable_set(:@id, data.first['id'])
+      t.instance_variable_set(:@completed, data.first['completed'])
+    end
   end
 
   def update(id, updated_task)
-    query = 'UPDATE tasks SET title = $1, description = $2, completed = $3 WHERE id = $4
-    RETURNING id, title, description, completed'
+    query = 'UPDATE tasks SET title = $1, description = $2, completed = $3 WHERE id = $4 RETURNING *'
     data = PostgreSQLHelper.instance.execute(query,
                                              [updated_task.title, updated_task.description, updated_task.completed, id])
-    JSON.parse(data.first.to_json, symbolize_names: true)
+    Task.new(data.first['title'], data.first['description']).tap do |t|
+      t.instance_variable_set(:@id, data.first['id'])
+      t.instance_variable_set(:@completed, data.first['completed'])
+    end
   end
 
   def destroy(id)
-    query = 'DELETE FROM tasks WHERE id = $1 RETURNING id, title, description, completed'
+    query = 'DELETE FROM tasks WHERE id = $1 RETURNING *'
     data = PostgreSQLHelper.instance.execute(query, [id])
-    JSON.parse(data.first.to_json, symbolize_names: true)
+    Task.new(data.first['title'], data.first['description']).tap do |t|
+      t.instance_variable_set(:@id, data.first['id'])
+      t.instance_variable_set(:@completed, data.first['completed'])
+    end
   end
 end
