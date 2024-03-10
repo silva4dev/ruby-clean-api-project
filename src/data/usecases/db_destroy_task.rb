@@ -11,9 +11,7 @@ class DbDestroyTask
   end
 
   def execute(id)
-    task = @task_repository.destroy(id)
-    raise StandardError("Task with id #{id} not found") if task.nil?
-
+    @task_repository.destroy(id)
     nil
   end
 end
