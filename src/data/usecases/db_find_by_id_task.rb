@@ -12,6 +12,8 @@ class DbFindByIdTask
 
   def execute(id)
     task = @task_repository.find_by_id(id)
+    return nil if task.nil?
+
     {
       id: task.id,
       title: task.title,
