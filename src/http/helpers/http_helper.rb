@@ -2,6 +2,7 @@
 
 require_relative '../contracts/http'
 require_relative '../errors/server_error'
+require_relative '../errors/not_found_error'
 
 class HttpHelper
   include HttpResponse
@@ -12,5 +13,9 @@ class HttpHelper
 
   def self.server_error
     { status_code: 500, body: ServerError.new }
+  end
+
+  def self.not_found
+    { status_code: 404, body: NotFoundError.new }
   end
 end
