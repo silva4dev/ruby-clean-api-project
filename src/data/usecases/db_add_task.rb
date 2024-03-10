@@ -11,6 +11,12 @@ class DbAddTask
   end
 
   def execute(task)
-    @task_repository.add(task)
+    result = @task_repository.add(task)
+    {
+      id: result.id,
+      title: result.title,
+      description: result.description,
+      completed: result.completed
+    }
   end
 end
