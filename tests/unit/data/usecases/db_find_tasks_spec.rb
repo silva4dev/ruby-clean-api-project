@@ -36,4 +36,9 @@ describe DbFindTasks, type: :unit do
     sut = usecase.execute
     expect(sut.length).to be(0)
   end
+
+  it 'Should throw if TaskRepository throws' do
+    allow(task_repository).to receive(:find).and_raise(StandardError)
+    expect { usecase.execute }.to raise_error(StandardError)
+  end
 end
