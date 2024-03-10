@@ -53,3 +53,5 @@ Lint/ConstantDefinitionInBlock:
   Enabled: false
 RSpec/LeakyConstantDeclaration:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false
