@@ -6,10 +6,7 @@ require_relative '../../../../../../src/root/config/env'
 require_relative '../../../../../../src/core/models/task'
 
 describe TaskPostgreSQLRepository, type: :integration do
-  def make_sut
-    task_repository = TaskPostgreSQLRepository.new
-    { task_repository: }
-  end
+  let(:task_repository) { described_class.new }
 
   before(:all) do
     PostgreSQLHelper.instance.connect(
@@ -30,50 +27,45 @@ describe TaskPostgreSQLRepository, type: :integration do
   end
 
   it 'Should add a task' do
-    sut = make_sut
-    output = sut[:task_repository].add(Task.new('Title 1', 'Description 1'))
-    expect(output.id).to be_a(String)
-    expect(output.title).to eq('Title 1')
-    expect(output.description).to eq('Description 1')
+    sut = task_repository.add(Task.new('Title 1', 'Description 1'))
+    expect(sut.id).to be_a(String)
+    expect(sut.title).to eq('Title 1')
+    expect(sut.description).to eq('Description 1')
   end
 
   it 'Should return a list of tasks' do
-    sut = make_sut
-    sut[:task_repository].add(Task.new('Title 1', 'Description 1'))
-    sut[:task_repository].add(Task.new('Title 2', 'Description 2'))
-    output = sut[:task_repository].find
-    expect(output.length).to eq(2)
-    expect(output[0].id).to be_a(String)
-    expect(output[0].title).to eq('Title 1')
-    expect(output[0].description).to eq('Description 1')
-    expect(output[1].id).to be_a(String)
-    expect(output[1].title).to eq('Title 2')
-    expect(output[1].description).to eq('Description 2')
+    task_repository.add(Task.new('Title 1', 'Description 1'))
+    task_repository.add(Task.new('Title 2', 'Description 2'))
+    sut = task_repository.find
+    expect(sut.length).to eq(2)
+    expect(sut[0].id).to be_a(String)
+    expect(sut[0].title).to eq('Title 1')
+    expect(sut[0].description).to eq('Description 1')
+    expect(sut[1].id).to be_a(String)
+    expect(sut[1].title).to eq('Title 2')
+    expect(sut[1].description).to eq('Description 2')
   end
 
   it 'Should return a task when filtered by id' do
-    sut = make_sut
-    task = sut[:task_repository].add(Task.new('Title 1', 'Description 1'))
-    output = sut[:task_repository].find_by_id(task.id)
-    expect(output.id).to be_a(String)
-    expect(output.title).to eq('Title 1')
-    expect(output.description).to eq('Description 1')
+    task = task_repository.add(Task.new('Title 1', 'Description 1'))
+    sut = task_repository.find_by_id(task.id)
+    expect(sut.id).to be_a(String)
+    expect(sut.title).to eq('Title 1')
+    expect(sut.description).to eq('Description 1')
   end
 
   it 'Should update a task' do
-    sut = make_sut
-    task = sut[:task_repository].add(Task.new('Title 1', 'Description 1'))
-    output = sut[:task_repository].update(task.id, Task.new('Title 1 Updated', 'Description 1 Updated'))
-    expect(output.id).to be_a(String)
-    expect(output.title).to eq('Title 1 Updated')
-    expect(output.description).to eq('Description 1 Updated')
+    task = task_repository.add(Task.new('Title 1', 'Description 1'))
+    sut = task_repository.update(task.id, Task.new('Title 1 Updated', 'Description 1 Updated'))
+    expect(sut.id).to be_a(String)
+    expect(sut.title).to eq('Title 1 Updated')
+    expect(sut.description).to eq('Description 1 Updated')
   end
 
   it 'Should delete a task' do
-    sut = make_sut
-    task = sut[:task_repository].add(Task.new('Title 1', 'Description 1'))
-    sut[:task_repository].destroy(task.id)
-    output = sut[:task_repository].find
-    expect(output.length).to be(0)
+    task = task_repository.add(Task.new('Title 1', 'Description 1'))
+    task_repository.destroy(task.id)
+    sut = task_repository.find
+    expect(sut.length).to be(0)
   end
 end

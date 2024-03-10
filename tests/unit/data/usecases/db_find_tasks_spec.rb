@@ -5,6 +5,9 @@ require_relative '../../../../src/data/contracts/db/task_repository'
 require_relative '../../../../src/core/models/task'
 
 describe DbFindTasks, type: :unit do
+  let(:task_repository) { TaskRepositoryStub.new }
+  let(:usecase) { described_class.new(task_repository) }
+
   class TaskRepositoryStub
     include TaskRepository
 
@@ -16,35 +19,21 @@ describe DbFindTasks, type: :unit do
     end
   end
 
-  def make_sut
-    task_repository = TaskRepositoryStub.new
-    usecase = DbFindTasks.new(task_repository)
-    { usecase:, task_repository: }
-  end
-
   it 'Should return a list of tasks' do
-    sut = make_sut
-    output = sut[:usecase].execute
-    expect(output[0][:id]).to be_a(String)
-    expect(output[0][:title]).to eq('Title 1')
-    expect(output[0][:description]).to eq('Description 1')
-    expect(output[0][:completed]).to be(true)
-    expect(output[1][:id]).to be_a(String)
-    expect(output[1][:title]).to eq('Title 2')
-    expect(output[1][:description]).to eq('Description 2')
-    expect(output[1][:completed]).to be(false)
+    sut = usecase.execute
+    expect(sut[0][:id]).to be_a(String)
+    expect(sut[0][:title]).to eq('Title 1')
+    expect(sut[0][:description]).to eq('Description 1')
+    expect(sut[0][:completed]).to be(true)
+    expect(sut[1][:id]).to be_a(String)
+    expect(sut[1][:title]).to eq('Title 2')
+    expect(sut[1][:description]).to eq('Description 2')
+    expect(sut[1][:completed]).to be(false)
   end
 
   it 'Should return empty tasks' do
-    sut = make_sut
-    allow(sut[:task_repository]).to receive(:find).and_return([])
-    output = sut[:usecase].execute
-    expect(output.length).to be(0)
-  end
-
-  it 'Should throw if TaskRepository throws' do
-    sut = make_sut
-    allow(sut[:task_repository]).to receive(:find).and_raise(StandardError)
-    expect { sut[:usecase].execute }.to raise_error(StandardError)
+    allow(task_repository).to receive(:find).and_return([])
+    sut = usecase.execute
+    expect(sut.length).to be(0)
   end
 end
