@@ -2,6 +2,7 @@
 
 require 'rack/test'
 require 'json'
+require 'simplecov'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -13,4 +14,5 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.pattern = 'tests/**/*_spec.rb'
   config.include Rack::Test::Methods
+  SimpleCov.start if ENV['COVERAGE']
 end
