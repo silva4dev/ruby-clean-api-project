@@ -34,7 +34,6 @@ describe DbUpdateTask, type: :unit do
     updated_task = Task.new('Title 1 Updated', 'Description 1 Updated')
     updated_task.mark_as_completed
     sut = usecase.execute(task_repository.tasks.first.id, updated_task)
-
     expect(sut[:id]).to be_a(String)
     expect(sut[:title]).to eq('Title 1 Updated')
     expect(sut[:description]).to eq('Description 1 Updated')
