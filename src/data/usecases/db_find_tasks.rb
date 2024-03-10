@@ -11,6 +11,8 @@ class DbFindTasks
   end
 
   def execute
+    return [] if @task_repository.find.nil?
+
     @task_repository.find.map do |task|
       {
         id: task.id,
