@@ -16,7 +16,7 @@ class DbFindByIdTask
       id: task.id,
       title: task.title,
       description: task.description,
-      completed: task.completed
+      completed: task.completed == 't'
     }
   end
 end
