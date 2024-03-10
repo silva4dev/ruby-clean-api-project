@@ -12,6 +12,5 @@ class DbDestroyTask
 
   def execute(id)
     @task_repository.destroy(id)
-    nil
   end
 end
