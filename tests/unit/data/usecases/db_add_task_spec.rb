@@ -11,9 +11,7 @@ describe DbAddTask, type: :unit do
   class TaskRepositoryStub
     include TaskRepository
 
-    def add(task)
-      task
-    end
+    def add(task) = task
   end
 
   it 'Should add a task' do
