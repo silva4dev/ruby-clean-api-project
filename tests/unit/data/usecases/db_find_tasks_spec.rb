@@ -27,7 +27,7 @@ describe DbFindTasks, type: :unit do
     expect(output[1][:completed]).to be(false)
   end
 
-  it 'Should return empty task list when no tasks are found' do
+  it 'Should return empty tasks' do
     task_repository = TaskRepositoryStub.new
     allow(task_repository).to receive(:find).and_return([])
     usecase = described_class.new(task_repository)
