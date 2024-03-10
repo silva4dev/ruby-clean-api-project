@@ -12,8 +12,11 @@ class DbFindByIdTask
 
   def execute(id)
     task = @task_repository.find_by_id(id)
-    raise StandardError("Task with id #{id} not found") if task.nil?
-
-    task
+    {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      completed: task.completed
+    }
   end
 end
