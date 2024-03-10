@@ -11,12 +11,12 @@ class DbDestroyTask
   end
 
   def execute(id)
-    result = @task_repository.destroy(id)
+    task = @task_repository.destroy(id)
     {
-      id: result.id,
-      title: result.title,
-      description: result.description,
-      completed: result.completed
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      completed: task.completed
     }
   end
 end

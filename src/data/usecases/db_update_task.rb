@@ -11,12 +11,12 @@ class DbUpdateTask
   end
 
   def execute(id, updated_task)
-    result = @task_repository.update(id, updated_task)
+    task = @task_repository.update(id, updated_task)
     {
-      id: result.id,
-      title: result.title,
-      description: result.description,
-      completed: result.completed
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      completed: task.completed
     }
   end
 end
