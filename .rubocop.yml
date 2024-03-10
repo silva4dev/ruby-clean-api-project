@@ -43,3 +43,9 @@ RSpec/NoExpectationExample:
   Enabled: false
 RSpec/BeforeAfterAll:
   Enabled: false
+RSpec/EmptyExampleGroup:
+  Enabled: false
+RSpec/HookArgument:
+  Enabled: false
+RSpec/RepeatedExample:
+  Enabled: false
