@@ -49,3 +49,7 @@ RSpec/HookArgument:
   Enabled: false
 RSpec/RepeatedExample:
   Enabled: false
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+RSpec/LeakyConstantDeclaration:
+  Enabled: false
