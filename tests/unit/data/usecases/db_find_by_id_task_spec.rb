@@ -29,4 +29,9 @@ describe DbFindByIdTask, type: :unit do
     expect(sut[:description]).to eq('Description 1')
     expect(sut[:completed]).to be(false)
   end
+
+  it 'Should throw if TaskRepository throws' do
+    allow(task_repository).to receive(:find_by_id).and_raise(StandardError)
+    expect { usecase.execute }.to raise_error(StandardError)
+  end
 end
