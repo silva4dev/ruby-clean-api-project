@@ -16,7 +16,7 @@ class DbAddTask
       id: task.id,
       title: task.title,
       description: task.description,
-      completed: task.completed == 't'
+      completed: task.completed
     }
   end
 end
