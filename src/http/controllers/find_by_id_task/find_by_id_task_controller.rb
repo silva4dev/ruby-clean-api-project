@@ -13,6 +13,8 @@ class FindByIdTaskController
 
   def handle(http_request)
     task = @find_by_id_task_usecase.execute(http_request[:params][:id])
+    return HttpHelper.not_found if task.nil?
+
     HttpHelper.ok(
       {
         id: task[:id],
