@@ -4,8 +4,11 @@ require 'grape'
 require_relative 'config/db'
 require_relative 'config/env'
 require_relative 'routes/grape/tasks_routes'
+require_relative 'middlewares/http_response_middleware'
 
 class Server < Grape::API
+  use HttpResponseMiddleware
+
   prefix :api
   format :json
 
