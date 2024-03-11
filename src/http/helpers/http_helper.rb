@@ -18,4 +18,8 @@ class HttpHelper
   def self.not_found
     { status_code: 404, body: NotFoundError.new }
   end
+
+  def self.no_content
+    { status_code: 204, body: nil }
+  end
 end
