@@ -16,7 +16,7 @@ class TaskPostgreSQLRepository
     data.map do |row|
       Task.new(row['title'], row['description']).tap do |t|
         t.instance_variable_set(:@id, row['id'])
-        t.instance_variable_set(:@completed, row['completed'])
+        t.instance_variable_set(:@completed, row['completed'] == 't' ? true : false)
       end
     end
   end
@@ -28,7 +28,7 @@ class TaskPostgreSQLRepository
 
     Task.new(data.first['title'], data.first['description']).tap do |t|
       t.instance_variable_set(:@id, data.first['id'])
-      t.instance_variable_set(:@completed, data.first['completed'])
+      t.instance_variable_set(:@completed, data.first['completed'] == 't' ? true : false)
     end
   end
 
@@ -39,7 +39,7 @@ class TaskPostgreSQLRepository
 
     Task.new(data.first['title'], data.first['description']).tap do |t|
       t.instance_variable_set(:@id, data.first['id'])
-      t.instance_variable_set(:@completed, data.first['completed'])
+      t.instance_variable_set(:@completed, data.first['completed'] == 't' ? true : false)
     end
   end
 
@@ -51,7 +51,7 @@ class TaskPostgreSQLRepository
 
     Task.new(data.first['title'], data.first['description']).tap do |t|
       t.instance_variable_set(:@id, data.first['id'])
-      t.instance_variable_set(:@completed, data.first['completed'])
+      t.instance_variable_set(:@completed, data.first['completed'] == 't' ? true : false)
     end
   end
 
@@ -62,7 +62,7 @@ class TaskPostgreSQLRepository
 
     Task.new(data.first['title'], data.first['description']).tap do |t|
       t.instance_variable_set(:@id, data.first['id'])
-      t.instance_variable_set(:@completed, data.first['completed'])
+      t.instance_variable_set(:@completed, data.first['completed'] == 't' ? true : false)
     end
   end
 end
