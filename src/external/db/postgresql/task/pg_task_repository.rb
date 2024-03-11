@@ -5,7 +5,7 @@ require_relative '../../../../data/contracts/db/task_repository'
 require_relative '../helpers/postgresql_helper'
 require_relative '../../../../core/models/task'
 
-class TaskPostgreSQLRepository
+class PgTaskRepository
   include TaskRepository
 
   def find
