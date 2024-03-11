@@ -3,7 +3,7 @@
 require 'rack/test'
 require 'json'
 require 'simplecov'
-require_relative '../src/root/server'
+require_relative '../src/main/server'
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

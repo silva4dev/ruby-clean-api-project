@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative '../../../../../src/external/db/postgresql/helpers/postgresql_helper'
-require_relative '../../../../../src/root/config/env'
-require_relative '../../../../../src/root/routes/grape/tasks_routes'
+require_relative '../../../../../src/main/config/env'
+require_relative '../../../../../src/main/routes/grape/tasks_routes'
 
 describe TasksRoute, type: :integration do
   before(:all) do
