@@ -55,3 +55,7 @@ RSpec/LeakyConstantDeclaration:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
+Style/RedundantConditional:
+  Enabled: false
+Style/IfWithBooleanLiteralBranches:
+  Enabled: false
