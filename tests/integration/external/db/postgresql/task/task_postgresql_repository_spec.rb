@@ -28,7 +28,7 @@ describe TaskPostgreSQLRepository, type: :integration do
 
   it 'Should add a task' do
     sut = task_repository.add(Task.new('Title 1', 'Description 1'))
-    expect(sut.id).to be_a(String)
+    expect(sut.id).to be_a(Integer)
     expect(sut.title).to eq('Title 1')
     expect(sut.description).to eq('Description 1')
   end
@@ -38,10 +38,10 @@ describe TaskPostgreSQLRepository, type: :integration do
     task_repository.add(Task.new('Title 2', 'Description 2'))
     sut = task_repository.find
     expect(sut.length).to eq(2)
-    expect(sut[0].id).to be_a(String)
+    expect(sut[0].id).to be_a(Integer)
     expect(sut[0].title).to eq('Title 1')
     expect(sut[0].description).to eq('Description 1')
-    expect(sut[1].id).to be_a(String)
+    expect(sut[1].id).to be_a(Integer)
     expect(sut[1].title).to eq('Title 2')
     expect(sut[1].description).to eq('Description 2')
   end
@@ -49,7 +49,7 @@ describe TaskPostgreSQLRepository, type: :integration do
   it 'Should return a task when filtered by id' do
     task = task_repository.add(Task.new('Title 1', 'Description 1'))
     sut = task_repository.find_by_id(task.id)
-    expect(sut.id).to be_a(String)
+    expect(sut.id).to be_a(Integer)
     expect(sut.title).to eq('Title 1')
     expect(sut.description).to eq('Description 1')
   end
@@ -57,7 +57,7 @@ describe TaskPostgreSQLRepository, type: :integration do
   it 'Should update a task' do
     task = task_repository.add(Task.new('Title 1', 'Description 1'))
     sut = task_repository.update(task.id, Task.new('Title 1 Updated', 'Description 1 Updated'))
-    expect(sut.id).to be_a(String)
+    expect(sut.id).to be_a(Integer)
     expect(sut.title).to eq('Title 1 Updated')
     expect(sut.description).to eq('Description 1 Updated')
   end
