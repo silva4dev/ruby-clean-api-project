@@ -15,7 +15,8 @@ class Server < Grape::API
   use CorsMiddleware
   use BodyParserMiddleware
 
-  prefix :api
+  prefix 'api'
+  format :json
 
   mount TasksRoute
 end
