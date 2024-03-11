@@ -9,6 +9,8 @@ class BodyParserMiddleware
 
   def call(env)
     status, headers, body = @app.call(env)
+    return [status, headers, body] if body.first.nil?
+
     if (200..299).cover?(status)
       [status, headers, [JSON.parse(body.first, symbolize_names: true).to_json]]
     else
