@@ -5,19 +5,25 @@ require_relative '../../../../src/data/contracts/db/task_repository'
 require_relative '../../../../src/core/models/task'
 
 describe DbFindTasks, type: :unit do
-  let(:task_repository) { TaskRepositoryStub.new }
-  let(:usecase) { described_class.new(task_repository) }
+  let(:task_repository) do
+    class FindTaskRepositoryStub
+      include TaskRepository
 
-  class TaskRepositoryStub
-    include TaskRepository
+      def initialize
+        @task1 = Task.new('Title 1', 'Description 1')
+        @task1.mark_as_completed
+        @task2 = Task.new('Title 2', 'Description 2')
+      end
 
-    def find
-      task1 = Task.new('Title 1', 'Description 1')
-      task1.mark_as_completed
-      task2 = Task.new('Title 2', 'Description 2')
-      [task1, task2]
+      def find
+        [@task1, @task2]
+      end
     end
+
+    FindTaskRepositoryStub.new
   end
+
+  let(:usecase) { described_class.new(task_repository) }
 
   it 'Should return a list of tasks' do
     sut = usecase.execute

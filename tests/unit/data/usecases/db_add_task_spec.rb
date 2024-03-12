@@ -5,14 +5,17 @@ require_relative '../../../../src/data/contracts/db/task_repository'
 require_relative '../../../../src/core/models/task'
 
 describe DbAddTask, type: :unit do
-  let(:task_repository) { TaskRepositoryStub.new }
-  let(:usecase) { described_class.new(task_repository) }
+  let(:task_repository) do
+    class AddTaskRepositoryStub
+      include TaskRepository
 
-  class TaskRepositoryStub
-    include TaskRepository
+      def add(task) = task
+    end
 
-    def add(task) = task
+    AddTaskRepositoryStub.new
   end
+
+  let(:usecase) { described_class.new(task_repository) }
 
   it 'Should add a task' do
     sut = usecase.execute(Task.new('Title 1', 'Description 1'))

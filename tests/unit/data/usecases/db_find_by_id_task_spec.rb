@@ -5,22 +5,27 @@ require_relative '../../../../src/data/contracts/db/task_repository'
 require_relative '../../../../src/core/models/task'
 
 describe DbFindByIdTask, type: :unit do
-  let(:task_repository) { TaskRepositoryStub.new }
-  let(:usecase) { described_class.new(task_repository) }
+  let(:task_repository) do
+    class FindByIdTaskRepositoryStub
+      include TaskRepository
 
-  class TaskRepositoryStub
-    include TaskRepository
+      attr_accessor :task
 
-    def task
-      @task ||= Task.new('Title 1', 'Description 1')
+      def initialize
+        @task = Task.new('Title 1', 'Description 1')
+      end
+
+      def find_by_id(id)
+        return unless @task.id == id
+
+        @task
+      end
     end
 
-    def find_by_id(id)
-      return unless task.id == id
-
-      task
-    end
+    FindByIdTaskRepositoryStub.new
   end
+
+  let(:usecase) { described_class.new(task_repository) }
 
   it 'Should return a task when filtered by id' do
     sut = usecase.execute(task_repository.task.id)

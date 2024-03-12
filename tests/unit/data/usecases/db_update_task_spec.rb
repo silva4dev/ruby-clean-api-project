@@ -5,30 +5,35 @@ require_relative '../../../../src/data/contracts/db/task_repository'
 require_relative '../../../../src/core/models/task'
 
 describe DbUpdateTask, type: :unit do
-  let(:task_repository) { TaskRepositoryStub.new }
-  let(:usecase) { described_class.new(task_repository) }
+  let(:task_repository) do
+    class UpdateTaskRepositoryStub
+      include TaskRepository
 
-  class TaskRepositoryStub
-    include TaskRepository
+      attr_accessor :tasks
 
-    def tasks
-      @tasks ||= [
-        Task.new('Title 1', 'Description 1'),
-        Task.new('Title 2', 'Description 2')
-      ]
+      def initialize
+        @tasks = [
+          Task.new('Title 1', 'Description 1'),
+          Task.new('Title 2', 'Description 2')
+        ]
+      end
+
+      def update(id, updated_task)
+        data = @tasks.find { |t| t.id == id }
+        return unless data
+
+        task = Task.new(updated_task.title, updated_task.description)
+        task.mark_as_completed if updated_task.completed
+        task_index = @tasks.index(data)
+        @tasks[task_index] = task
+        task
+      end
     end
 
-    def update(id, updated_task)
-      data = tasks.find { |t| t.id == id }
-      return unless data
-
-      task = Task.new(updated_task.title, updated_task.description)
-      task.mark_as_completed if updated_task.completed
-      task_index = tasks.index(data)
-      tasks[task_index] = task
-      task
-    end
+    UpdateTaskRepositoryStub.new
   end
+
+  let(:usecase) { described_class.new(task_repository) }
 
   it 'Should update a task' do
     updated_task = Task.new('Title 1 Updated', 'Description 1 Updated')
