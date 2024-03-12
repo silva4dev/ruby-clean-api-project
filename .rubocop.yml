@@ -59,3 +59,5 @@ Style/RedundantConditional:
   Enabled: false
 Style/IfWithBooleanLiteralBranches:
   Enabled: false
+RSpec/Rails/HaveHttpStatus:
+  Enabled: false
