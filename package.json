@@ -9,8 +9,8 @@
     "node": "21.x"
   },
   "scripts": {
-    "start": "bundle exec ruby ./src/root/server.rb",
-    "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 3333 -r ./src/root/server.rb -s puma'",
+    "start": "bundle exec ruby ./src/main/server.rb",
+    "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 3333 -r ./src/main/server.rb -s puma'",
     "test": "bundle exec rspec --format progress",
     "test:verbose": "bundle exec rspec --format documentation",
     "test:unit": "bundle exec rspec --pattern 'tests/unit/**/*_spec.rb' --format documentation --color --fail-fast --order random",
