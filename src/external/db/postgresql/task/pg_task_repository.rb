@@ -57,7 +57,7 @@ class PgTaskRepository
 
   def destroy(id)
     query = 'DELETE FROM tasks WHERE id = $1 RETURNING *'
-    data = PostgreSQLHelper.instance.execute(query, [id])
+    data = PostgreSQLHelper.instance.execute(query, [id.to_i])
     return nil if data.ntuples.zero?
 
     Task.new(data.first['title'], data.first['description']).tap do |t|

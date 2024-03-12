@@ -12,6 +12,8 @@ class DbDestroyTask
 
   def execute(id)
     task = @task_repository.destroy(id)
+    return nil if task.nil?
+
     {
       id: task.id,
       title: task.title,
