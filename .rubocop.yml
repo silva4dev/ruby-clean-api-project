@@ -61,3 +61,5 @@ Style/IfWithBooleanLiteralBranches:
   Enabled: false
 RSpec/Rails/HaveHttpStatus:
   Enabled: false
+RSpec/InstanceVariable:
+  Enabled: false
