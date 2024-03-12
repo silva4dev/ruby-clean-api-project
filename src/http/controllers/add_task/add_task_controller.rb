@@ -7,7 +7,7 @@ require_relative '../../../core/models/task'
 class AddTaskController
   include Controller
 
-  # @param find_tasks [AddTask]
+  # @param add_task_usecase [AddTask]
   def initialize(add_task_usecase)
     @add_task_usecase = add_task_usecase
   end
