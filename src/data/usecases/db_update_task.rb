@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../core/usecases/update_task'
+require_relative '../../domain/usecases/update_task'
 
 class DbUpdateTask
   include UpdateTask

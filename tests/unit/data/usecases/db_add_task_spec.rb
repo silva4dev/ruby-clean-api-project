@@ -2,7 +2,7 @@
 
 require_relative '../../../../src/data/usecases/db_add_task'
 require_relative '../../../../src/data/contracts/db/task_repository'
-require_relative '../../../../src/core/models/task'
+require_relative '../../../../src/domain/models/task'
 
 describe DbAddTask, type: :unit do
   let(:task_repository) do

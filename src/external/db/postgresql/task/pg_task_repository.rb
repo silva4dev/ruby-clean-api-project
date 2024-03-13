@@ -3,7 +3,7 @@
 require 'json'
 require_relative '../../../../data/contracts/db/task_repository'
 require_relative '../helpers/postgresql_helper'
-require_relative '../../../../core/models/task'
+require_relative '../../../../domain/models/task'
 
 class PgTaskRepository
   include TaskRepository

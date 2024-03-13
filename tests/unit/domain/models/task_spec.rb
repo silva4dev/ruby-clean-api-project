@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../src/core/models/task'
+require_relative '../../../../src/domain/models/task'
 
 describe Task, type: :unit do
   it 'Should throw error when title is empty' do

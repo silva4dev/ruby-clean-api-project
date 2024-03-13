@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../core/usecases/add_task'
+require_relative '../../domain/usecases/add_task'
 
 class DbAddTask
   include AddTask

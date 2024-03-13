@@ -3,7 +3,7 @@
 require_relative '../../../../../../src/external/db/postgresql/task/pg_task_repository'
 require_relative '../../../../../../src/external/db/postgresql/helpers/postgresql_helper'
 require_relative '../../../../../../src/main/config/env'
-require_relative '../../../../../../src/core/models/task'
+require_relative '../../../../../../src/domain/models/task'
 
 describe PgTaskRepository, type: :integration do
   let(:task_repository) { described_class.new }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../core/usecases/destroy_task'
+require_relative '../../domain/usecases/destroy_task'
 
 class DbDestroyTask
   include DestroyTask

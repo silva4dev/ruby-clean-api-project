@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../core/usecases/find_by_id_task'
+require_relative '../../domain/usecases/find_by_id_task'
 
 class DbFindByIdTask
   include FindByIdTask

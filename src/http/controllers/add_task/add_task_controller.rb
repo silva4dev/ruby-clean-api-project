@@ -2,7 +2,7 @@
 
 require_relative '../../helpers/http_helper'
 require_relative '../../contracts/controller'
-require_relative '../../../core/models/task'
+require_relative '../../../domain/models/task'
 
 class AddTaskController
   include Controller
