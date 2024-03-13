@@ -108,4 +108,11 @@ describe TasksRoute, type: :integration do
     sut = JSON.parse(last_response.body, symbolize_names: true)
     expect(sut[:tasks].count).to be(0)
   end
+
+  it 'Should not destroy a task when passing invalid id' do
+    delete '/api/tasks/invalid_id'
+    expect(last_response.status).to be(404)
+    sut = JSON.parse(last_response.body, symbolize_names: true)
+    expect(sut[:error]).to eq('Not Found')
+  end
 end
