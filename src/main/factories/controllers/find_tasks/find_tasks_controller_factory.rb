@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../http/controllers/find_tasks/find_tasks_controller'
+require_relative '../../../../presentation/controllers/find_tasks/find_tasks_controller'
 require_relative '../../../../application/usecases/db_find_tasks'
 require_relative '../../../../infrastructure/db/postgresql/task/pg_task_repository'
 

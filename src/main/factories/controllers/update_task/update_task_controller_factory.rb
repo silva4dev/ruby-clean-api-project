@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../http/controllers/update_task/update_task_controller'
+require_relative '../../../../presentation/controllers/update_task/update_task_controller'
 require_relative '../../../../application/usecases/db_update_task'
 require_relative '../../../../infrastructure/db/postgresql/task/pg_task_repository'
 
