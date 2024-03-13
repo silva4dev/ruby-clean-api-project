@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../../../presentation/controllers/destroy_task/destroy_task_controller'
-require_relative '../../../../application/usecases/db_destroy_task'
-require_relative '../../../../infrastructure/db/pg/task/pg_task_repository'
+require_relative '../../../presentation/controllers/destroy_task_controller'
+require_relative '../../../application/usecases/db_destroy_task'
+require_relative '../../../infrastructure/db/pg/task/pg_task_repository'
 
 class DestroyTaskControllerFactory
   def self.create

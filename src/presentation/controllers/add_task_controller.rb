@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/http_helper'
-require_relative '../../contracts/controller'
-require_relative '../../../domain/models/task'
+require_relative '../helpers/http_helper'
+require_relative '../contracts/controller'
+require_relative '../../domain/models/task'
 
 class AddTaskController
   include Controller

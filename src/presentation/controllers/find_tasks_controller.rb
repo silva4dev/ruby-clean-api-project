@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/http_helper'
-require_relative '../../contracts/controller'
+require_relative '../helpers/http_helper'
+require_relative '../contracts/controller'
 
 class FindTasksController
   include Controller
