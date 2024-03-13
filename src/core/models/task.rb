@@ -25,8 +25,8 @@ class Task
   end
 
   # @return [void]
-  def mark_as_completed
-    @completed = true
+  def mark_as_completed(completed = true)
+    @completed = completed
   end
 
   private
