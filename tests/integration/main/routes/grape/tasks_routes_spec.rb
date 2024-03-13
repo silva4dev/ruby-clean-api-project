@@ -55,15 +55,8 @@ describe TasksRoute, type: :integration do
     expect(sut[:description]).to eq('Description 1')
   end
 
-  it 'Should not return a task when filtered by invalid id' do
+  it 'Should not return a task when passing invalid id' do
     get '/api/tasks/invalid_id'
-    expect(last_response.status).to be(404)
-    sut = JSON.parse(last_response.body, symbolize_names: true)
-    expect(sut[:error]).to eq('Not Found')
-  end
-
-  it 'Should return not found if task does not exist' do
-    get '/api/tasks/non_existing_id'
     expect(last_response.status).to be(404)
     sut = JSON.parse(last_response.body, symbolize_names: true)
     expect(sut[:error]).to eq('Not Found')
@@ -93,6 +86,13 @@ describe TasksRoute, type: :integration do
     expect(task[:title]).to eq('Title 2')
     expect(task[:description]).to eq('Description 2')
     expect(task[:completed]).to be(true)
+  end
+
+  it 'Should not update a task when passing invalid id' do
+    put '/api/tasks/invalid_id', { title: 'Title 2', description: 'Description 2', completed: true }.to_json
+    expect(last_response.status).to be(404)
+    sut = JSON.parse(last_response.body, symbolize_names: true)
+    expect(sut[:error]).to eq('Not Found')
   end
 
   it 'Should destroy a task' do
