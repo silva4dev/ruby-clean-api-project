@@ -8,7 +8,7 @@ services:
       - ./data:/data/db
       - ./data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
-      POSTGRES_DB: grape-clean-api
+      POSTGRES_DB: ruby-grape-clean-api
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
       POSTGRES_HOST: postgres
@@ -23,7 +23,7 @@ services:
     restart: always
     command: bash -c "bundle install && rerun -- rackup -p 5050 -r ./src/main/server.rb -s puma -o 0.0.0.0 2>/dev/null"
     environment:
-      POSTGRES_DB: grape-clean-api
+      POSTGRES_DB: ruby-grape-clean-api
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
       POSTGRES_HOST: postgres
