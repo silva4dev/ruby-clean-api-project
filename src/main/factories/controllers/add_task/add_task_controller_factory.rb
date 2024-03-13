@@ -2,7 +2,7 @@
 
 require_relative '../../../../http/controllers/add_task/add_task_controller'
 require_relative '../../../../application/usecases/db_add_task'
-require_relative '../../../../external/db/postgresql/task/pg_task_repository'
+require_relative '../../../../infrastructure/db/postgresql/task/pg_task_repository'
 
 class AddTaskControllerFactory
   def self.create
