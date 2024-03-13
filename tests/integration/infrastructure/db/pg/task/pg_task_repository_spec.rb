@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../../src/infrastructure/db/postgresql/task/pg_task_repository'
-require_relative '../../../../../../src/infrastructure/db/postgresql/helpers/postgresql_helper'
+require_relative '../../../../../../src/infrastructure/db/pg/task/pg_task_repository'
+require_relative '../../../../../../src/infrastructure/db/pg/helpers/postgresql_helper'
 require_relative '../../../../../../src/main/config/env'
 require_relative '../../../../../../src/domain/models/task'
 

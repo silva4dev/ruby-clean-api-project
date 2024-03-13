@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../config/env'
-require_relative '../../infrastructure/db/postgresql/helpers/postgresql_helper'
+require_relative '../../infrastructure/db/pg/helpers/postgresql_helper'
 
 PostgreSQLHelper.instance.connect(
   dbname: Env::POSTGRESQL[:DBNAME],

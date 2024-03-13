@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../../../src/infrastructure/db/postgresql/helpers/postgresql_helper'
+require_relative '../../../../../src/infrastructure/db/pg/helpers/postgresql_helper'
 require_relative '../../../../../src/main/config/env'
 require_relative '../../../../../src/main/routes/grape/tasks_routes'
 
