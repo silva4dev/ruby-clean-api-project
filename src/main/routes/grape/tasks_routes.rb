@@ -6,6 +6,7 @@ require_relative '../../factories/controllers/find_tasks/find_tasks_controller_f
 require_relative '../../factories/controllers/find_by_id_task/find_by_id_task_controller_factory'
 require_relative '../../factories/controllers/add_task/add_task_controller_factory'
 require_relative '../../factories/controllers/destroy_task/destroy_task_controller_factory'
+require_relative '../../factories/controllers/update_task/update_task_controller_factory'
 
 class TasksRoute < Grape::API
   namespace :tasks do
@@ -23,6 +24,12 @@ class TasksRoute < Grape::API
 
     post '/' do
       http_response = RouteAdapter.adapt(AddTaskControllerFactory.create).call(request)
+      status http_response[:status_code]
+      http_response[:body]
+    end
+
+    put '/:id' do
+      http_response = RouteAdapter.adapt(UpdateTaskControllerFactory.create).call(request)
       status http_response[:status_code]
       http_response[:body]
     end
