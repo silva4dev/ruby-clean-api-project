@@ -63,3 +63,5 @@ RSpec/Rails/HaveHttpStatus:
   Enabled: false
 RSpec/InstanceVariable:
   Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false
