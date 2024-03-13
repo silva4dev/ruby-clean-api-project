@@ -12,6 +12,8 @@ class DbUpdateTask
 
   def execute(id, updated_task)
     task = @task_repository.update(id, updated_task)
+    return nil if task.nil?
+
     {
       id: task.id,
       title: task.title,
