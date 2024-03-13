@@ -71,4 +71,18 @@ describe TasksRoute, type: :integration do
     expect(sut[:tasks].first[:description]).to eq('Description 1')
     expect(sut[:tasks].first[:completed]).to be(false)
   end
+
+  it 'Should destroy a task' do
+    post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
+    expect(last_response.status).to be(204)
+    get '/api/tasks'
+    expect(last_response.status).to be(200)
+    task = JSON.parse(last_response.body, symbolize_names: true)[:tasks].first
+    delete "/api/tasks/#{task[:id]}"
+    expect(last_response.status).to be(204)
+    get '/api/tasks'
+    expect(last_response.status).to be(200)
+    sut = JSON.parse(last_response.body, symbolize_names: true)
+    expect(sut[:tasks].count).to be(0)
+  end
 end
