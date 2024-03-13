@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../../../src/data/usecases/db_update_task'
-require_relative '../../../../src/data/contracts/db/task_repository'
+require_relative '../../../../src/application/usecases/db_update_task'
+require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
 describe DbUpdateTask, type: :unit do

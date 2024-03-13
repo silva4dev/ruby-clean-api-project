@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../../http/controllers/find_tasks/find_tasks_controller'
-require_relative '../../../../data/usecases/db_find_tasks'
+require_relative '../../../../application/usecases/db_find_tasks'
 require_relative '../../../../external/db/postgresql/task/pg_task_repository'
 
 class FindTasksControllerFactory

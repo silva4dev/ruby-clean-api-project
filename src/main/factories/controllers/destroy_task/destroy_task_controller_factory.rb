@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../../http/controllers/destroy_task/destroy_task_controller'
-require_relative '../../../../data/usecases/db_destroy_task'
+require_relative '../../../../application/usecases/db_destroy_task'
 require_relative '../../../../external/db/postgresql/task/pg_task_repository'
 
 class DestroyTaskControllerFactory

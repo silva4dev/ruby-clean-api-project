@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../../../src/data/usecases/db_find_tasks'
-require_relative '../../../../src/data/contracts/db/task_repository'
+require_relative '../../../../src/application/usecases/db_find_tasks'
+require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
 describe DbFindTasks, type: :unit do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../../http/controllers/add_task/add_task_controller'
-require_relative '../../../../data/usecases/db_add_task'
+require_relative '../../../../application/usecases/db_add_task'
 require_relative '../../../../external/db/postgresql/task/pg_task_repository'
 
 class AddTaskControllerFactory

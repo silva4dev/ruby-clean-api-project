@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
-require_relative '../../../../data/contracts/db/task_repository'
+require_relative '../../../../application/contracts/db/task_repository'
 require_relative '../helpers/postgresql_helper'
 require_relative '../../../../domain/models/task'
 
