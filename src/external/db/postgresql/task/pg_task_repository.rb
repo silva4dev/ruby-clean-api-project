@@ -46,7 +46,8 @@ class PgTaskRepository
   def update(id, updated_task)
     query = 'UPDATE tasks SET title = $1, description = $2, completed = $3 WHERE id = $4 RETURNING *'
     data = PostgreSQLHelper.instance.execute(query,
-                                             [updated_task.title, updated_task.description, updated_task.completed, id])
+                                             [updated_task.title, updated_task.description, updated_task.completed,
+                                              id.to_i])
     return nil if data.ntuples.zero?
 
     Task.new(data.first['title'], data.first['description']).tap do |t|
