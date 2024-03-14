@@ -18,6 +18,13 @@ describe DbUpdateTask, type: :unit do
         ]
       end
 
+      def find_by_id(id)
+        data = @tasks.find { |t| t.id == id }
+        return unless data
+
+        data
+      end
+
       def update(id, updated_task)
         data = @tasks.find { |t| t.id == id }
         return unless data
@@ -38,7 +45,14 @@ describe DbUpdateTask, type: :unit do
   it 'Should update a task' do
     updated_task = Task.new('Title 1 Updated', 'Description 1 Updated')
     updated_task.mark_as_completed
-    sut = usecase.execute(task_repository.tasks.first.id, updated_task)
+    sut = usecase.execute(
+      {
+        id: task_repository.tasks.first.id,
+        title: updated_task.title,
+        description: updated_task.description,
+        completed: updated_task.completed
+      }
+    )
     expect(sut[:id]).to be_a(String)
     expect(sut[:title]).to eq('Title 1 Updated')
     expect(sut[:description]).to eq('Description 1 Updated')

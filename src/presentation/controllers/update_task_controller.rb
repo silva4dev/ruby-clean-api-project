@@ -13,13 +13,14 @@ class UpdateTaskController
   end
 
   def handle(http_request)
-    title = http_request[:body][:title]
-    description = http_request[:body][:description]
-    completed = http_request[:body][:completed]
-    task = Task.new(title, description)
-    task.mark_as_completed(completed)
-    result = @update_task_usecase.execute(http_request[:params][:id], task)
-    return HttpHelper.not_found if result.nil?
+    input = {
+      id: http_request[:params][:id],
+      title: http_request[:body][:title],
+      description: http_request[:body][:description],
+      completed: http_request[:body][:completed]
+    }
+    task = @update_task_usecase.execute(input)
+    return HttpHelper.not_found if task.nil?
 
     HttpHelper.no_content
   rescue StandardError

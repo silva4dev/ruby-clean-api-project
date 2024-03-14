@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module AddTask
-  # @param {Task} task
-  def execute(task)
+  def execute(input)
     raise NotImplementedError
   end
 end

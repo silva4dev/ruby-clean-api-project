@@ -6,13 +6,13 @@ require_relative '../errors/missing_value_error'
 
 class Task
   # @return [String]
-  attr_reader :id
+  attr_accessor :id
   # @return [String]
-  attr_reader :title
+  attr_accessor :title
   # @return [String]
-  attr_reader :description
+  attr_accessor :description
   # @return [Boolean]
-  attr_reader :completed
+  attr_accessor :completed
 
   # @param {String} title
   # @param {String} description

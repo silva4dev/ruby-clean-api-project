@@ -13,9 +13,11 @@ class AddTaskController
   end
 
   def handle(http_request)
-    title = http_request[:body][:title]
-    description = http_request[:body][:description]
-    @add_task_usecase.execute(Task.new(title, description))
+    input = {
+      title: http_request[:body][:title],
+      description: http_request[:body][:description]
+    }
+    @add_task_usecase.execute(input)
     HttpHelper.no_content
   rescue StandardError
     HttpHelper.server_error

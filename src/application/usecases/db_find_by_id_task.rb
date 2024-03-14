@@ -10,8 +10,8 @@ class DbFindByIdTask
     @task_repository = task_repository
   end
 
-  def execute(id)
-    task = @task_repository.find_by_id(id)
+  def execute(input)
+    task = @task_repository.find_by_id(input[:id])
     return nil if task.nil?
 
     {

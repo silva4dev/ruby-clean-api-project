@@ -18,7 +18,7 @@ describe DbAddTask, type: :unit do
   let(:usecase) { described_class.new(task_repository) }
 
   it 'Should add a task' do
-    sut = usecase.execute(Task.new('Title 1', 'Description 1'))
+    sut = usecase.execute({ title: 'Title 1', description: 'Description 1' })
     expect(sut[:id]).to be_a(String)
     expect(sut[:title]).to eq('Title 1')
     expect(sut[:description]).to eq('Description 1')

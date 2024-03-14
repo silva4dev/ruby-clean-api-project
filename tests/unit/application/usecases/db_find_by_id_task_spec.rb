@@ -28,7 +28,7 @@ describe DbFindByIdTask, type: :unit do
   let(:usecase) { described_class.new(task_repository) }
 
   it 'Should return a task when filtered by id' do
-    sut = usecase.execute(task_repository.task.id)
+    sut = usecase.execute({ id: task_repository.task.id })
     expect(sut[:id]).to be_a(String)
     expect(sut[:title]).to eq('Title 1')
     expect(sut[:description]).to eq('Description 1')

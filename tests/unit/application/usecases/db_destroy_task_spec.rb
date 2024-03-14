@@ -34,13 +34,13 @@ describe DbDestroyTask, type: :unit do
 
   it 'Should destroy a task' do
     task1 = task_repository.tasks.first
-    sut = usecase.execute(task1.id)
+    sut = usecase.execute({ id: task1.id })
     expect(sut[:id]).to eq(task1.id)
     expect(sut[:title]).to eq('Title 1')
     expect(sut[:description]).to eq('Description 1')
     expect(sut[:completed]).to be(false)
     task2 = task_repository.tasks.last
-    sut = usecase.execute(task2.id)
+    sut = usecase.execute({ id: task2.id })
     expect(sut[:id]).to eq(task2.id)
     expect(sut[:title]).to eq('Title 2')
     expect(sut[:description]).to eq('Description 2')

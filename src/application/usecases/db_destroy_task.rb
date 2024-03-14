@@ -10,8 +10,8 @@ class DbDestroyTask
     @task_repository = task_repository
   end
 
-  def execute(id)
-    task = @task_repository.destroy(id)
+  def execute(input)
+    task = @task_repository.destroy(input[:id])
     return nil if task.nil?
 
     {

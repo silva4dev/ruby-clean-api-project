@@ -13,7 +13,8 @@ class DestroyTaskController
   end
 
   def handle(http_request)
-    task = @destroy_task_usecase.execute(http_request[:params][:id])
+    input = { id: http_request[:params][:id] }
+    task = @destroy_task_usecase.execute(input)
     return HttpHelper.not_found if task.nil?
 
     HttpHelper.no_content

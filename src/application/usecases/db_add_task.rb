@@ -10,8 +10,9 @@ class DbAddTask
     @task_repository = task_repository
   end
 
-  def execute(task)
-    task = @task_repository.add(task)
+  def execute(input)
+    task = Task.new(input[:title], input[:description])
+    @task_repository.add(task)
     {
       id: task.id,
       title: task.title,
