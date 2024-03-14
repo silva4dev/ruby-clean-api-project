@@ -5,7 +5,6 @@ require_relative '../../domain/usecases/find_tasks'
 class DbFindTasks
   include FindTasks
 
-  # @param task_repository [TaskRepository]
   def initialize(task_repository)
     @task_repository = task_repository
   end

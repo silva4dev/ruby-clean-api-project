@@ -5,17 +5,8 @@ require_relative '../errors/invalid_type_error'
 require_relative '../errors/missing_value_error'
 
 class Task
-  # @return [String]
-  attr_accessor :id
-  # @return [String]
-  attr_accessor :title
-  # @return [String]
-  attr_accessor :description
-  # @return [Boolean]
-  attr_accessor :completed
+  attr_accessor :id, :title, :description, :completed
 
-  # @param {String} title
-  # @param {String} description
   def initialize(title, description)
     @id = SecureRandom.uuid
     @title = title
@@ -24,7 +15,6 @@ class Task
     validate
   end
 
-  # @return [void]
   def mark_as_completed(completed = true)
     @completed = completed
   end
