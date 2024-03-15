@@ -7,12 +7,15 @@ require_relative '../../domain/models/task'
 class AddTaskController
   include Controller
 
-  # @param add_task_usecase [AddTask]
-  def initialize(add_task_usecase)
+  def initialize(add_task_usecase, validation)
     @add_task_usecase = add_task_usecase
+    @validation = validation
   end
 
   def handle(http_request)
+    error = @validation.validate(http_request[:body])
+    return HttpHelper.bad_request(error.message) if error
+
     input = {
       title: http_request[:body][:title],
       description: http_request[:body][:description]
