@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 require_relative '../../../presentation/controllers/update_task_controller'
-require_relative '../../../application/usecases/db_update_task'
-require_relative '../../../infrastructure/db/pg/task/pg_task_repository'
+require_relative '../../../main/factories/usecases/db_update_task_factory'
 
 class UpdateTaskControllerFactory
   def self.create
-    task_repository = PgTaskRepository.new
-    db_update_task_usecase = DbUpdateTask.new(task_repository)
-    UpdateTaskController.new(db_update_task_usecase)
+    UpdateTaskController.new(DbUpdateTaskFactory.create)
   end
 end
