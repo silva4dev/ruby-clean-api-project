@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 require_relative '../../../presentation/controllers/destroy_task_controller'
-require_relative '../../../application/usecases/db_destroy_task'
-require_relative '../../../infrastructure/db/pg/task/pg_task_repository'
+require_relative '../../../main/factories/usecases/db_destroy_task_factory'
 
 class DestroyTaskControllerFactory
   def self.create
-    task_repository = PgTaskRepository.new
-    db_destroy_task_usecase = DbDestroyTask.new(task_repository)
-    DestroyTaskController.new(db_destroy_task_usecase)
+    DestroyTaskController.new(DbDestroyTaskFactory.create)
   end
 end
