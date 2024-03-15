@@ -7,7 +7,6 @@ require_relative '../../domain/models/task'
 class DestroyTaskController
   include Controller
 
-  # @param destroy_task_usecase [DestroyTask]
   def initialize(destroy_task_usecase)
     @destroy_task_usecase = destroy_task_usecase
   end

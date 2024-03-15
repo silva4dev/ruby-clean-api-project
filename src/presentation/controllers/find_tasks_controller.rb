@@ -6,7 +6,6 @@ require_relative '../contracts/controller'
 class FindTasksController
   include Controller
 
-  # @param find_tasks_usecase [FindTasks]
   def initialize(find_tasks_usecase)
     @find_tasks_usecase = find_tasks_usecase
   end

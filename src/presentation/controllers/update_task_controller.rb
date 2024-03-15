@@ -7,7 +7,6 @@ require_relative '../../domain/models/task'
 class UpdateTaskController
   include Controller
 
-  # @param update_task_usecase [UpdateTask]
   def initialize(update_task_usecase)
     @update_task_usecase = update_task_usecase
   end
