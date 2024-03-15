@@ -22,4 +22,8 @@ class HttpHelper
   def self.no_content
     { status_code: 204, body: nil }
   end
+
+  def self.bad_request(error)
+    { status_code: 400, body: error }
+  end
 end
