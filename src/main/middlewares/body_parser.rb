@@ -14,7 +14,12 @@ class BodyParserMiddleware
     if (200..299).cover?(status)
       [status, headers, [JSON.parse(body.first, symbolize_names: true).to_json]]
     else
-      [status, headers, [{ error: JSON.parse(body.first, symbolize_names: true) }.to_json]]
+      data = JSON.parse(body.first, symbolize_names: true)
+      if data.instance_of?(Array)
+        [status, headers, [{ errors: data }.to_json]]
+      else
+        [status, headers, [{ error: data }.to_json]]
+      end
     end
   end
 end
