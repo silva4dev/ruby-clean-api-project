@@ -7,11 +7,15 @@ require_relative '../../domain/models/task'
 class UpdateTaskController
   include Controller
 
-  def initialize(update_task_usecase)
+  def initialize(update_task_usecase, validation)
     @update_task_usecase = update_task_usecase
+    @validation = validation
   end
 
   def handle(http_request)
+    error = @validation.validate(http_request[:body])
+    return HttpHelper.bad_request(error) if error
+
     input = {
       id: http_request[:params][:id],
       title: http_request[:body][:title],

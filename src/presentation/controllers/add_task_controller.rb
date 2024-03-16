@@ -14,7 +14,7 @@ class AddTaskController
 
   def handle(http_request)
     error = @validation.validate(http_request[:body])
-    return HttpHelper.bad_request(error.message) if error
+    return HttpHelper.bad_request(error) if error
 
     input = {
       title: http_request[:body][:title],
