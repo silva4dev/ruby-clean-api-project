@@ -10,10 +10,13 @@ class ValidationComposite
   end
 
   def validate(input)
+    errors = []
     @validations.each do |validation|
       error = validation.validate(input)
-      return error if error
+      errors.push(error) if error
     end
-    nil
+    return unless errors.length.positive?
+
+    errors.length == 1 ? errors.first : errors
   end
 end
