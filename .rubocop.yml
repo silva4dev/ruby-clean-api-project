@@ -65,3 +65,5 @@ RSpec/InstanceVariable:
   Enabled: false
 Style/OptionalBooleanParameter:
   Enabled: false
+Style/GuardClause:
+  Enabled: false
