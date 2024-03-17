@@ -5,7 +5,8 @@ require_relative '../errors/invalid_type_error'
 require_relative '../errors/missing_value_error'
 
 class Task
-  attr_accessor :id, :title, :description, :completed
+  attr_reader :id
+  attr_accessor :title, :description, :completed
 
   def initialize(title, description)
     @id = SecureRandom.uuid
@@ -22,9 +23,9 @@ class Task
   private
 
   def validate
-    raise InvalidTypeError.new('Title', 'String') unless title.is_a?(String)
-    raise InvalidTypeError.new('Description', 'String') unless description.is_a?(String)
-    raise MissingValueError, 'Title' if title.empty?
-    raise MissingValueError, 'Description' if description.empty?
+    raise InvalidTypeError.new('Title', 'String') unless @title.is_a?(String)
+    raise InvalidTypeError.new('Description', 'String') unless @description.is_a?(String)
+    raise MissingValueError, 'Title is required' if @title.empty?
+    raise MissingValueError, 'Description is required' if @description.empty?
   end
 end
