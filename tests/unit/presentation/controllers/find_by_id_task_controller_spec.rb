@@ -36,7 +36,7 @@ describe FindByIdTaskController, type: :unit do
     expect(sut[:body][:completed]).to be(false)
   end
 
-  it 'Should return 404 if invalid data is provided' do
+  it 'Should return 404 if task does not exist' do
     allow(usecase).to receive(:execute).and_return(nil)
     http_request = {
       params: {
