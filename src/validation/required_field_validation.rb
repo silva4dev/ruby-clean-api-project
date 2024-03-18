@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../../src/presentation/errors/missing_param_error'
-require_relative '../../src/presentation/errors/missing_value_error'
+require_relative '../../src/presentation/errors/request_param_error'
+require_relative '../../src/presentation/errors/request_value_error'
 require_relative '../../src/presentation/contracts/validation'
 
 class RequiredFieldValidation
@@ -14,10 +14,10 @@ class RequiredFieldValidation
   end
 
   def validate(input)
-    return MissingParamError.new(@field_name) if input.empty?
-    return MissingValueError.new(@field_name) if input[@field_name] == ''
+    return RequestParamError.new(@field_name) if input.empty?
+    return RequestValueError.new(@field_name) if input[@field_name] == ''
     return if input[@field_name]
 
-    MissingParamError.new(@field_name)
+    RequestParamError.new(@field_name)
   end
 end
