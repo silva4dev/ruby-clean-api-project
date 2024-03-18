@@ -6,7 +6,6 @@ services:
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
-      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
       POSTGRES_DB: ruby-grape-clean-api
       POSTGRES_USER: postgres
@@ -21,7 +20,7 @@ services:
     image: ruby:latest
     working_dir: /usr/src/ruby-grape-clean-api
     restart: always
-    command: bash -c "bundle install && rerun -- rackup -p 5050 -r ./src/main/server.rb -s puma -o 0.0.0.0 2>/dev/null"
+    command: bash -c "bundle install && ruby ./src/main/config/migrations.rb && rerun -- rackup -p 5050 -r ./src/main/server.rb -s puma -o 0.0.0.0 2>/dev/null"
     environment:
       POSTGRES_DB: ruby-grape-clean-api
       POSTGRES_USER: postgres
