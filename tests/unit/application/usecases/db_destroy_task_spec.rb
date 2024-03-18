@@ -18,6 +18,13 @@ describe DbDestroyTask, type: :unit do
         ]
       end
 
+      def find_by_id(id)
+        data = @tasks.find { |t| t.id == id }
+        return unless data
+
+        data
+      end
+
       def destroy(id)
         data = @tasks.find { |t| t.id == id }
         return unless data
