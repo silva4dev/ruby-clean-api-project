@@ -33,6 +33,8 @@ class PgTaskRepository
   end
 
   def find_by_id(id)
+    return nil unless id.to_i.to_s == id.to_s
+
     query = 'SELECT * FROM tasks WHERE id = $1'
     data = PostgreSQLHelper.instance.execute(query, [id.to_i])
     return nil if data.ntuples.zero?
