@@ -43,4 +43,20 @@ describe AddTaskController, type: :unit do
     expect(sut[:status_code]).to be(204)
     expect(sut[:body]).to be_nil
   end
+
+  it 'Should return 400 if passing empty body' do
+    allow(validation).to receive(:validate).and_return(
+      {
+        errors: [
+          RequestParamError.new(:title),
+          RequestParamError.new(:description)
+        ]
+      }
+    )
+    http_request = { body: {} }
+    sut = controller.handle(http_request)
+    expect(sut[:status_code]).to be(400)
+    errors = sut[:body][:errors].map { |error| { error: error.message } }
+    expect(errors).to contain_exactly({ error: 'Title is required' }, { error: 'Description is required' })
+  end
 end

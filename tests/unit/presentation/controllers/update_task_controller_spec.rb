@@ -48,7 +48,7 @@ describe UpdateTaskController, type: :unit do
     expect(sut[:body]).to be_nil
   end
 
-  it 'Should return 404 if invalid data is provided' do
+  it 'Should return 404 if task does not exist' do
     allow(usecase).to receive(:execute).and_return(nil)
     http_request = {
       params: {
@@ -63,5 +63,21 @@ describe UpdateTaskController, type: :unit do
     sut = controller.handle(http_request)
     expect(sut[:status_code]).to be(404)
     expect(sut[:body]).to eq(NotFoundError.new)
+  end
+
+  it 'Should return 400 if passing empty body' do
+    allow(validation).to receive(:validate).and_return(
+      {
+        errors: [
+          RequestParamError.new(:title),
+          RequestParamError.new(:description)
+        ]
+      }
+    )
+    http_request = { body: {} }
+    sut = controller.handle(http_request)
+    expect(sut[:status_code]).to be(400)
+    errors = sut[:body][:errors].map { |error| { error: error.message } }
+    expect(errors).to contain_exactly({ error: 'Title is required' }, { error: 'Description is required' })
   end
 end
