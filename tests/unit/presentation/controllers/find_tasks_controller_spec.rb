@@ -33,5 +33,13 @@ describe FindTasksController, type: :unit do
     http_request = {}
     sut = controller.handle(http_request)
     expect(sut[:status_code]).to be(200)
+    expect(sut[:body]).to eq(
+      {
+        tasks: [
+          { id: 1, title: 'New title', description: 'New description', completed: false },
+          { id: 2, title: 'Other title', description: 'Other description', completed: true }
+        ]
+      }
+    )
   end
 end
