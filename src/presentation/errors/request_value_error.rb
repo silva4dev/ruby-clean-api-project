@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class MissingValueError < StandardError
+class RequestValueError < StandardError
   def initialize(param_name)
     super("Missing value: #{param_name}")
-    @name = 'MissingValueError'
+    @name = 'RequestValueError'
   end
 end
