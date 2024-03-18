@@ -23,9 +23,9 @@ class Task
   private
 
   def validate
+    raise MissingParamError, 'Title' if @title.nil? || @title.empty?
+    raise MissingParamError, 'Description' if @description.nil? || @description.empty?
     raise InvalidTypeError.new('Title', 'String') unless @title.is_a?(String)
     raise InvalidTypeError.new('Description', 'String') unless @description.is_a?(String)
-    raise MissingParamError, 'Title is required' if @title.empty?
-    raise MissingParamError, 'Description is required' if @description.empty?
   end
 end
