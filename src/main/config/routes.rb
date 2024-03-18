@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'grape'
 require 'grape-swagger'
 require_relative '../middlewares/accept'
@@ -15,15 +16,13 @@ class Routes < Grape::API
   use BodyParserMiddleware
 
   prefix 'api'
-  # version 'v1'
   format :json
 
   mount TasksRoute
-  add_swagger_documentation(
-    info: {
-      title: 'Grape Clean API',
-      description: 'Gerenciador de tarefas'
-    },
-    mount_path: '/swagger_doc'
-  )
+
+  get '/swagger_doc' do
+    content_type :json
+    json_content = File.read('./src/main/swagger/swagger.json')
+    JSON.parse(json_content)
+  end
 end
