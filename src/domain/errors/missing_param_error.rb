@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class MissingValueError < StandardError
+class MissingParamError < StandardError
   def initialize(attribute)
     super("#{attribute.capitalize} is required")
-    @name = 'MissingValueError'
+    @name = 'MissingParamError'
   end
 end
