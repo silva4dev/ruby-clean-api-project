@@ -10,6 +10,7 @@ gem 'grape-swagger'
 gem 'pg'
 gem 'puma'
 gem 'rack', '~> 2.2'
+gem 'sequel'
 
 group :development do
   gem 'rerun'

@@ -12,6 +12,7 @@
     "start": "bundle exec ruby ./src/main/server.rb",
     "start:dev": "bundle exec rerun --pattern 'src/**/*.{rb}' 'rackup -p 5050 -r ./src/main/server.rb -s puma'",
     "up": "docker-compose up -d",
+    "migrations": "ruby ./src/main/config/migrations.rb",
     "down": "docker-compose down",
     "test": "bundle exec rspec --format documentation --color",
     "test:verbose": "bundle exec rspec --format documentation",
