@@ -42,4 +42,12 @@ describe FindTasksController, type: :unit do
       }
     )
   end
+
+  it 'Should return 200 empty array if valid data is provided' do
+    http_request = {}
+    allow(usecase).to receive(:execute).and_return([])
+    sut = controller.handle(http_request)
+    expect(sut[:status_code]).to be(200)
+    expect(sut[:body]).to eq({ tasks: [] })
+  end
 end
