@@ -4,9 +4,9 @@ require_relative '../config/env'
 require_relative '../../infrastructure/db/pg/helpers/postgresql_helper'
 
 PostgreSQLHelper.instance.connect(
-  dbname: Env::POSTGRESQL[:DBNAME],
-  user: Env::POSTGRESQL[:USER],
-  password: Env::POSTGRESQL[:PASSWORD],
-  host: Env::POSTGRESQL[:HOST],
-  port: Env::POSTGRESQL[:PORT]
+  dbname: ENV.fetch('POSTGRES_DB', nil),
+  user: ENV.fetch('POSTGRES_USER', nil),
+  password: ENV.fetch('POSTGRES_PASSWORD', nil),
+  host: ENV.fetch('POSTGRES_HOST', nil),
+  port: ENV.fetch('POSTGRES_PORT', nil)
 )

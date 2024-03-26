@@ -4,12 +4,12 @@ require 'sequel'
 require_relative '../config/env'
 
 DB = Sequel.connect(
-  adapter: ENV['DRIVER'] || 'postgres',
-  host: ENV['POSTGRES_HOST'] || 'localhost',
-  database: ENV['POSTGRES_DB'] || 'ruby-grape-clean-api',
-  user: ENV['POSTGRES_USER'] || 'postgres',
-  password: ENV['POSTGRES_PASSWORD'] || '123456',
-  port: ENV['POSTGRES_PORT'] || 5432
+  adapter: ENV.fetch('DRIVER', nil),
+  host: ENV.fetch('POSTGRES_HOST', nil),
+  database: ENV.fetch('POSTGRES_DB', nil),
+  user: ENV.fetch('POSTGRES_USER', nil),
+  password: ENV.fetch('POSTGRES_PASSWORD', nil),
+  port: ENV.fetch('POSTGRES_PORT', nil)
 )
 
 Sequel.extension :migration
