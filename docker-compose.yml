@@ -25,7 +25,7 @@ services:
   api:
     container_name: api-container
     image: ruby:latest
-    working_dir: /usr/src/ruby-grape-clean-api
+    working_dir: /usr/src/ruby-clean-api
     restart: always
     command: bash -c "bundle install && ruby ./src/main/config/migrations.rb && rerun -- rackup -p 5050 -r ./src/main/server.rb -s puma -o 0.0.0.0 2>/dev/null"
     depends_on:
@@ -36,10 +36,10 @@ services:
     environment:
       - POSTGRES_HOST=postgres
     volumes:
-      - ./src:/usr/src/ruby-grape-clean-api/src
-      - ./Gemfile:/usr/src/ruby-grape-clean-api/Gemfile
-      - ./config.ru:/usr/src/ruby-grape-clean-api/config.ru
-      - ./Gemfile.lock:/usr/src/ruby-grape-clean-api/Gemfile.lock
-      - ./package.json:/usr/src/ruby-grape-clean-api/package.json
+      - ./src:/usr/src/ruby-clean-api/src
+      - ./Gemfile:/usr/src/ruby-clean-api/Gemfile
+      - ./config.ru:/usr/src/ruby-clean-api/config.ru
+      - ./Gemfile.lock:/usr/src/ruby-clean-api/Gemfile.lock
+      - ./package.json:/usr/src/ruby-clean-api/package.json
     ports:
       - "5050:5050"
