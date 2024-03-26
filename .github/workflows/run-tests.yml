@@ -47,12 +47,14 @@ jobs:
         run: |
           bundle exec ruby ./src/main/config/migrations.rb
         env:
+          DRIVER: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
 
       - name: Run Tests
         run: COVERAGE=true bundle exec rspec --format documentation --color
         env:
+          DRIVER: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
 
