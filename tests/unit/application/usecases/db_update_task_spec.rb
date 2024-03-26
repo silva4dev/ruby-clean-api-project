@@ -4,7 +4,7 @@ require_relative '../../../../src/application/usecases/db_update_task'
 require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
-describe DbUpdateTask, type: :unit do
+RSpec.describe DbUpdateTask, type: :unit do
   let(:task_repository) do
     class UpdateTaskRepositoryStub
       include TaskRepository
@@ -19,20 +19,18 @@ describe DbUpdateTask, type: :unit do
       end
 
       def find_by_id(id)
-        data = @tasks.find { |t| t.id == id }
-        return unless data
-
-        data
+        @tasks.find { |t| t.id == id }
       end
 
       def update(id, updated_task)
-        data = @tasks.find { |t| t.id == id }
-        return unless data
-
         task = Task.new(updated_task.title, updated_task.description)
         task.mark_as_completed if updated_task.completed
-        task_index = @tasks.index(data)
-        @tasks[task_index] = task
+        @tasks.each_with_index do |t, i|
+          if t.id == id
+            @tasks[i] = task
+            break
+          end
+        end
         task
       end
     end
@@ -42,7 +40,7 @@ describe DbUpdateTask, type: :unit do
 
   let(:usecase) { described_class.new(task_repository) }
 
-  it 'Should update a task' do
+  it 'updates a task' do
     updated_task = Task.new('Title 1 Updated', 'Description 1 Updated')
     updated_task.mark_as_completed
     sut = usecase.execute(
@@ -59,7 +57,7 @@ describe DbUpdateTask, type: :unit do
     expect(sut[:completed]).to be(true)
   end
 
-  it 'Should throw if TaskRepository throws' do
+  it 'throws an error if TaskRepository throws' do
     allow(task_repository).to receive(:update).and_raise(StandardError)
     expect { usecase.execute }.to raise_error(StandardError)
   end

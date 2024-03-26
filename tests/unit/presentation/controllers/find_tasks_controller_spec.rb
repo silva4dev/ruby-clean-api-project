@@ -3,7 +3,7 @@
 require_relative '../../../../src/presentation/controllers/find_tasks_controller'
 require_relative '../../../../src/domain/usecases/find_tasks'
 
-describe FindTasksController, type: :unit do
+RSpec.describe FindTasksController, type: :unit do
   let(:usecase) do
     class FindTasksUseCaseStub
       include FindTasks
@@ -29,7 +29,7 @@ describe FindTasksController, type: :unit do
   end
   let(:controller) { described_class.new(usecase) }
 
-  it 'Should return 200 if valid data is provided' do
+  it 'returns 200 if valid data is provided' do
     http_request = {}
     sut = controller.handle(http_request)
     expect(sut[:status_code]).to be(200)
@@ -43,7 +43,7 @@ describe FindTasksController, type: :unit do
     )
   end
 
-  it 'Should return 200 with an empty task list' do
+  it 'returns 200 with an empty task list' do
     http_request = {}
     allow(usecase).to receive(:execute).and_return([])
     sut = controller.handle(http_request)

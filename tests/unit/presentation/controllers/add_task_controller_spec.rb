@@ -4,7 +4,7 @@ require_relative '../../../../src/presentation/controllers/add_task_controller'
 require_relative '../../../../src/domain/usecases/add_task'
 require_relative '../../../../src/presentation/contracts/validation'
 
-describe AddTaskController, type: :unit do
+RSpec.describe AddTaskController, type: :unit do
   let(:usecase) do
     class AddTaskUseCaseStub
       include AddTask
@@ -32,7 +32,7 @@ describe AddTaskController, type: :unit do
   end
   let(:controller) { described_class.new(usecase, validation) }
 
-  it 'Should return 204 if valid data is provided' do
+  it 'returns 204 if valid data is provided' do
     http_request = {
       body: {
         title: 'New title',
@@ -44,7 +44,7 @@ describe AddTaskController, type: :unit do
     expect(sut[:body]).to be_nil
   end
 
-  it 'Should return 400 if passing empty body' do
+  it 'returns 400 if passing empty body' do
     allow(validation).to receive(:validate).and_return(
       {
         errors: [

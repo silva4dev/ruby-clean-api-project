@@ -3,7 +3,7 @@
 require_relative '../../../../../src/infrastructure/db/pg/helpers/postgresql_helper'
 require_relative '../../../../../src/main/routes/grape/tasks_routes'
 
-describe TasksRoute, type: :integration do
+RSpec.describe TasksRoute, type: :integration do
   before(:all) do
     PostgreSQLHelper.instance.connect(
       dbname: ENV.fetch('POSTGRES_DB', nil),
@@ -22,7 +22,7 @@ describe TasksRoute, type: :integration do
     PostgreSQLHelper.instance.execute('DELETE FROM tasks')
   end
 
-  it 'Should return a list of tasks' do
+  it 'returns a list of tasks' do
     post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
     expect(last_response.status).to be(204)
     post '/api/tasks', { title: 'Title 2', description: 'Description 2' }.to_json
@@ -34,14 +34,14 @@ describe TasksRoute, type: :integration do
     expect(sut[:tasks].count).to be(3)
   end
 
-  it 'Should return empty tasks' do
+  it 'returns empty tasks' do
     get '/api/tasks'
     sut = JSON.parse(last_response.body, symbolize_names: true)
     expect(last_response.status).to be(200)
     expect(sut[:tasks].count).to be(0)
   end
 
-  it 'Should return a task when filtered by id' do
+  it 'returns a task when filtered by id' do
     post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
     expect(last_response.status).to be(204)
     get '/api/tasks'
@@ -54,14 +54,14 @@ describe TasksRoute, type: :integration do
     expect(sut[:description]).to eq('Description 1')
   end
 
-  it 'Should not return a task when passing invalid id' do
+  it 'does not return a task when passing invalid id' do
     get '/api/tasks/invalid_id'
     expect(last_response.status).to be(404)
     sut = JSON.parse(last_response.body, symbolize_names: true)
     expect(sut[:error]).to eq('Not Found')
   end
 
-  it 'Should add a task' do
+  it 'adds a task' do
     post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
     expect(last_response.status).to be(204)
     get '/api/tasks'
@@ -71,7 +71,7 @@ describe TasksRoute, type: :integration do
     expect(sut[:tasks].first[:completed]).to be(false)
   end
 
-  it 'Should update a task' do
+  it 'updates a task' do
     post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
     expect(last_response.status).to be(204)
     get '/api/tasks'
@@ -87,14 +87,14 @@ describe TasksRoute, type: :integration do
     expect(task[:completed]).to be(true)
   end
 
-  it 'Should not update a task when passing invalid id' do
+  it 'does not update a task when passing invalid id' do
     put '/api/tasks/invalid_id', { title: 'Title 2', description: 'Description 2', completed: true }.to_json
     expect(last_response.status).to be(404)
     sut = JSON.parse(last_response.body, symbolize_names: true)
     expect(sut[:error]).to eq('Not Found')
   end
 
-  it 'Should destroy a task' do
+  it 'destroys a task' do
     post '/api/tasks', { title: 'Title 1', description: 'Description 1' }.to_json
     expect(last_response.status).to be(204)
     get '/api/tasks'
@@ -108,7 +108,7 @@ describe TasksRoute, type: :integration do
     expect(sut[:tasks].count).to be(0)
   end
 
-  it 'Should not destroy a task when passing invalid id' do
+  it 'does not destroy a task when passing invalid id' do
     delete '/api/tasks/invalid_id'
     expect(last_response.status).to be(404)
     sut = JSON.parse(last_response.body, symbolize_names: true)

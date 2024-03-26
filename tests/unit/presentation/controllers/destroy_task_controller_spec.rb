@@ -3,7 +3,7 @@
 require_relative '../../../../src/presentation/controllers/destroy_task_controller'
 require_relative '../../../../src/domain/usecases/destroy_task'
 
-describe DestroyTaskController, type: :unit do
+RSpec.describe DestroyTaskController, type: :unit do
   let(:usecase) do
     class DestroyTaskUseCaseStub
       include DestroyTask
@@ -21,7 +21,7 @@ describe DestroyTaskController, type: :unit do
   end
   let(:controller) { described_class.new(usecase) }
 
-  it 'Should return 204 if valid data is provided' do
+  it 'returns 204 if valid data is provided' do
     http_request = {
       params: {
         id: 1
@@ -32,7 +32,7 @@ describe DestroyTaskController, type: :unit do
     expect(sut[:body]).to be_nil
   end
 
-  it 'Should return 404 if task does not exist' do
+  it 'returns 404 if task does not exist' do
     allow(usecase).to receive(:execute).and_return(nil)
     http_request = {
       params: {

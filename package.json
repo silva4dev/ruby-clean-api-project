@@ -19,7 +19,7 @@
     "test:integration": "ENVIRONMENT=test bundle exec rspec --pattern 'tests/integration/**/*_spec.rb' --format documentation --color",
     "test:staged": "ENVIRONMENT=test bundle exec rspec --only-failures",
     "test:ci": "ENVIRONMENT=test COVERAGE=true npm test",
-    "ruby:fix": "bundle exec rubocop -a",
+    "ruby:fix": "bundle exec rubocop -A",
     "ruby:lint": "bundle exec rubocop",
     "prepare": "husky"
   },

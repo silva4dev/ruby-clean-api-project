@@ -4,7 +4,7 @@ require_relative '../../../../src/application/usecases/db_find_tasks'
 require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
-describe DbFindTasks, type: :unit do
+RSpec.describe DbFindTasks, type: :unit do
   let(:task_repository) do
     class FindTaskRepositoryStub
       include TaskRepository
@@ -25,7 +25,7 @@ describe DbFindTasks, type: :unit do
 
   let(:usecase) { described_class.new(task_repository) }
 
-  it 'Should return a list of tasks' do
+  it 'returns a list of tasks' do
     sut = usecase.execute
     expect(sut[0][:id]).to be_a(String)
     expect(sut[0][:title]).to eq('Title 1')
@@ -37,13 +37,13 @@ describe DbFindTasks, type: :unit do
     expect(sut[1][:completed]).to be(false)
   end
 
-  it 'Should return empty tasks' do
+  it 'returns empty tasks' do
     allow(task_repository).to receive(:find).and_return([])
     sut = usecase.execute
     expect(sut.length).to be(0)
   end
 
-  it 'Should throw if TaskRepository throws' do
+  it 'throws an error if TaskRepository throws' do
     allow(task_repository).to receive(:find).and_raise(StandardError)
     expect { usecase.execute }.to raise_error(StandardError)
   end

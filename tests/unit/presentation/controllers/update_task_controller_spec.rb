@@ -4,7 +4,7 @@ require_relative '../../../../src/presentation/controllers/update_task_controlle
 require_relative '../../../../src/domain/usecases/update_task'
 require_relative '../../../../src/presentation/contracts/validation'
 
-describe UpdateTaskController, type: :unit do
+RSpec.describe UpdateTaskController, type: :unit do
   let(:usecase) do
     class UpdateTaskUseCaseStub
       include UpdateTask
@@ -32,7 +32,7 @@ describe UpdateTaskController, type: :unit do
   end
   let(:controller) { described_class.new(usecase, validation) }
 
-  it 'Should return 204 if valid data is provided' do
+  it 'returns 204 if valid data is provided' do
     http_request = {
       params: {
         id: 1
@@ -48,7 +48,7 @@ describe UpdateTaskController, type: :unit do
     expect(sut[:body]).to be_nil
   end
 
-  it 'Should return 404 if task does not exist' do
+  it 'returns 404 if task does not exist' do
     allow(usecase).to receive(:execute).and_return(nil)
     http_request = {
       params: {
@@ -65,7 +65,7 @@ describe UpdateTaskController, type: :unit do
     expect(sut[:body]).to eq(NotFoundError.new)
   end
 
-  it 'Should return 400 if passing empty body' do
+  it 'returns 400 if passing empty body' do
     allow(validation).to receive(:validate).and_return(
       {
         errors: [

@@ -4,7 +4,7 @@ require_relative '../../../../src/application/usecases/db_find_by_id_task'
 require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
-describe DbFindByIdTask, type: :unit do
+RSpec.describe DbFindByIdTask, type: :unit do
   let(:task_repository) do
     class FindByIdTaskRepositoryStub
       include TaskRepository
@@ -27,7 +27,7 @@ describe DbFindByIdTask, type: :unit do
 
   let(:usecase) { described_class.new(task_repository) }
 
-  it 'Should return a task when filtered by id' do
+  it 'returns a task when filtered by id' do
     sut = usecase.execute({ id: task_repository.task.id })
     expect(sut[:id]).to be_a(String)
     expect(sut[:title]).to eq('Title 1')
@@ -35,7 +35,7 @@ describe DbFindByIdTask, type: :unit do
     expect(sut[:completed]).to be(false)
   end
 
-  it 'Should throw if TaskRepository throws' do
+  it 'throws an error if TaskRepository throws' do
     allow(task_repository).to receive(:find_by_id).and_raise(StandardError)
     expect { usecase.execute }.to raise_error(StandardError)
   end

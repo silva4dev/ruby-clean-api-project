@@ -4,7 +4,7 @@ require_relative '../../../../src/presentation/controllers/find_by_id_task_contr
 require_relative '../../../../src/domain/usecases/find_by_id_task'
 require_relative '../../../../src/presentation/errors/not_found_error'
 
-describe FindByIdTaskController, type: :unit do
+RSpec.describe FindByIdTaskController, type: :unit do
   let(:usecase) do
     class FindByIdTaskUseCaseStub
       include FindByIdTask
@@ -22,7 +22,7 @@ describe FindByIdTaskController, type: :unit do
   end
   let(:controller) { described_class.new(usecase) }
 
-  it 'Should return 200 if valid data is provided' do
+  it 'returns 200 if valid data is provided' do
     http_request = {
       params: {
         id: 1
@@ -36,7 +36,7 @@ describe FindByIdTaskController, type: :unit do
     expect(sut[:body][:completed]).to be(false)
   end
 
-  it 'Should return 404 if task does not exist' do
+  it 'returns 404 if task does not exist' do
     allow(usecase).to receive(:execute).and_return(nil)
     http_request = {
       params: {

@@ -4,10 +4,8 @@ require:
 
 AllCops:
   TargetRubyVersion: 3.3.0
+  SuggestExtensions: false
   NewCops: enable
-  Include:
-    - "src/**/*.rb"
-    - "tests/**/*.rb"
 
 Style/FrozenStringLiteralComment:
   Enabled: true
@@ -67,7 +65,7 @@ Style/OptionalBooleanParameter:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-RuboCop(Metrics/CyclomaticComplexity:
+Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false

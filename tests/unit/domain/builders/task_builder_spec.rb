@@ -2,10 +2,10 @@
 
 require_relative '../../../../src/domain/builders/task_builder'
 
-describe TaskBuilder, type: :unit do
+RSpec.describe TaskBuilder, type: :unit do
   let(:task_builder) { described_class.new }
 
-  it 'Should build a task' do
+  it 'builds a task' do
     task = task_builder
         .with_title('New title')
         .with_description('New description')

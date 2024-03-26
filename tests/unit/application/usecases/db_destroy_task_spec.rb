@@ -4,7 +4,7 @@ require_relative '../../../../src/application/usecases/db_destroy_task'
 require_relative '../../../../src/application/contracts/db/task_repository'
 require_relative '../../../../src/domain/models/task'
 
-describe DbDestroyTask, type: :unit do
+RSpec.describe DbDestroyTask, type: :unit do
   let(:task_repository) do
     class DestroyTaskRepositoryStub
       include TaskRepository
@@ -39,7 +39,7 @@ describe DbDestroyTask, type: :unit do
 
   let(:usecase) { described_class.new(task_repository) }
 
-  it 'Should destroy a task' do
+  it 'destroys a task' do
     task1 = task_repository.tasks.first
     sut = usecase.execute({ id: task1.id })
     expect(sut[:id]).to eq(task1.id)
@@ -54,7 +54,7 @@ describe DbDestroyTask, type: :unit do
     expect(sut[:completed]).to be(false)
   end
 
-  it 'Should throw if TaskRepository throws' do
+  it 'throws an error if TaskRepository throws' do
     allow(task_repository).to receive(:destroy).and_raise(StandardError)
     expect { usecase.execute('any_id') }.to raise_error(StandardError)
   end
