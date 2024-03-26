@@ -18,6 +18,7 @@ jobs:
           POSTGRES_PASSWORD: 123456
           POSTGRES_PORT: 5432
           POSTGRES_HOST: postgres
+          DRIVER: postgres
 
     strategy:
       matrix:
@@ -33,7 +34,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Use Ruby 3.3
+      - name: Use Ruby 3.3.0
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
@@ -42,10 +43,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          bundle config set --local without 'development test'
           bundle install
 
       - name: Run Migrations
-        run: ruby ./src/main/config/migrations.rb
+        run: |
+          gem install sequel
+          ruby ./src/main/config/migrations.rb
 
       - name: Run Tests
         run: COVERAGE=true bundle exec rspec --format documentation --color
