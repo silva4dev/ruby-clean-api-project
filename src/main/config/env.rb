@@ -4,6 +4,6 @@ require 'dotenv'
 
 if ENV['ENVIRONMENT'] == 'test'
   Dotenv.load('.env.test')
-else
+elsif ENV['ENVIRONMENT'] == 'development'
   Dotenv.load('.env')
 end
