@@ -22,6 +22,25 @@ services:
     ports:
       - "5433:5432"
 
+  migration_runner_test:
+    container_name: migration-runner_test
+    image: ruby:latest
+    working_dir: /usr/src/ruby-clean-api
+    command: bash -c "bundle install && bundle exec ruby ./src/main/config/migrations.rb"
+    env_file:
+      - .env.test
+    environment:
+      - POSTGRES_HOST=postgres_test
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./src:/usr/src/ruby-clean-api/src
+      - ./Gemfile:/usr/src/ruby-clean-api/Gemfile
+      - ./config.ru:/usr/src/ruby-clean-api/config.ru
+      - ./Gemfile.lock:/usr/src/ruby-clean-api/Gemfile.lock
+      - ./package.json:/usr/src/ruby-clean-api/package.json
+    depends_on:
+      - postgres_test
+
   api:
     container_name: api-container
     image: ruby:latest
