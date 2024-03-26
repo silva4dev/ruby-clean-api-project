@@ -13,14 +13,13 @@ gem 'puma'
 gem 'rack', '~> 2.2'
 gem 'sequel'
 
-group :development do
+group :development, :test do
+  gem 'pry'
+  gem 'byebug'
   gem 'rerun'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
-end
-
-group :test do
   gem 'rack-test'
   gem 'rspec'
   gem 'simplecov'
