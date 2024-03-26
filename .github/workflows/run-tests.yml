@@ -16,9 +16,6 @@ jobs:
           POSTGRES_DB: ruby-grape-clean-api
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: 123456
-          POSTGRES_PORT: 5432
-          POSTGRES_HOST: localhost
-          DRIVER: postgres
 
     strategy:
       matrix:
