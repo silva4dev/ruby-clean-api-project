@@ -1,0 +1,49 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  run-tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ruby-grape-clean-api
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 123456
+
+    strategy:
+      matrix:
+        node-version: [21]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Use Ruby 3.3
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          npm install
+          bundle install
+
+      - name: Run Tests
+        run: npm run test:ci
+
+      - name: Run Coveralls
+        uses: coverallsapp/github-action@v2
