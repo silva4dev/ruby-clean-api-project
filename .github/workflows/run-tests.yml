@@ -44,9 +44,7 @@ jobs:
         run: bundle clean --force
 
       - name: Install dependencies
-        run: |
-          bundle install
-          npm Install
+        run: bundle install && npm Install
 
       - name: Run Migrations
         run: |
