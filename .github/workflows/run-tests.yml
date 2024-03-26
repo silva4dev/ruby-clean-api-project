@@ -48,7 +48,7 @@ jobs:
 
       - name: Run Migrations
         run: |
-          ruby ./src/main/config/migrations.rb
+          bundle exec ruby ./src/main/config/migrations.rb
 
       - name: Run Tests
         run: COVERAGE=true bundle exec rspec --format documentation --color
