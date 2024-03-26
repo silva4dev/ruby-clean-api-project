@@ -3,17 +3,24 @@ services:
   postgres:
     container_name: pg-container
     image: postgres:latest
+    env_file:
+      - .env
     restart: always
     volumes:
       - ./data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ruby-grape-clean-api
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
     ports:
       - "5432:5432"
+
+  postgres_test:
+    container_name: pg-test-container
+    image: postgres:latest
+    env_file:
+      - .env.test
+    restart: always
+    volumes:
+      - ./data_test:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
 
   api:
     container_name: api-container
@@ -21,12 +28,13 @@ services:
     working_dir: /usr/src/ruby-grape-clean-api
     restart: always
     command: bash -c "bundle install && ruby ./src/main/config/migrations.rb && rerun -- rackup -p 5050 -r ./src/main/server.rb -s puma -o 0.0.0.0 2>/dev/null"
+    depends_on:
+      - postgres
+      - postgres_test
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: ruby-grape-clean-api
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
+      - POSTGRES_HOST=postgres
     volumes:
       - ./src:/usr/src/ruby-grape-clean-api/src
       - ./Gemfile:/usr/src/ruby-grape-clean-api/Gemfile
@@ -35,5 +43,3 @@ services:
       - ./package.json:/usr/src/ruby-grape-clean-api/package.json
     ports:
       - "5050:5050"
-    links:
-      - postgres
