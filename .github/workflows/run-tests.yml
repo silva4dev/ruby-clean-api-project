@@ -44,6 +44,9 @@ jobs:
           npm install
           bundle install
 
+      - name: Run Migrations
+        run: ruby ./src/main/config/migrations.rb
+
       - name: Run Tests
         run: COVERAGE=true bundle exec rspec --format documentation --color
 
