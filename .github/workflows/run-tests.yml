@@ -16,8 +16,6 @@ jobs:
           POSTGRES_DB: ruby-grape-clean-api
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_PORT: 5432
-          POSTGRES_HOST: localhost
 
     strategy:
       matrix:
@@ -50,6 +48,9 @@ jobs:
           bundle exec ruby ./src/main/config/migrations.rb
         env:
           DRIVER: postgres
+          POSTGRES_DB: ruby-grape-clean-api
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
 
@@ -57,6 +58,9 @@ jobs:
         run: COVERAGE=true bundle exec rspec --format documentation --color
         env:
           DRIVER: postgres
+          POSTGRES_DB: ruby-grape-clean-api
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
 
