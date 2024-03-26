@@ -15,9 +15,7 @@ jobs:
         env:
           POSTGRES_DB: ruby-grape-clean-api
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 123456
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
 
     strategy:
       matrix:
@@ -48,9 +46,15 @@ jobs:
       - name: Run Migrations
         run: |
           bundle exec ruby ./src/main/config/migrations.rb
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
 
       - name: Run Tests
         run: COVERAGE=true bundle exec rspec --format documentation --color
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
 
       - name: Run Coveralls
         uses: coverallsapp/github-action@v2
