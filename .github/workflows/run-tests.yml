@@ -37,18 +37,19 @@ jobs:
       - name: Use Ruby 3.3.0
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3
+          ruby-version: 3.3.0
           bundler-cache: true
+
+      - name: Limpar cache do Bundler
+        run: bundle clean --force
 
       - name: Install dependencies
         run: |
-          npm install
-          bundle config set --local without 'development test'
           bundle install
+          npm Install
 
       - name: Run Migrations
         run: |
-          gem install sequel
           ruby ./src/main/config/migrations.rb
 
       - name: Run Tests
